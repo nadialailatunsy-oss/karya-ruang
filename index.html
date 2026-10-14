@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karya Ruang - Catatan Biaya Proyek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header><h1>CV Karya Ruang</h1><p>Catatan biaya proyek: catat pengeluaran, lihat sisa anggaran</p></header>
+<div id="home" class="hv">
+<div class="scene" aria-hidden="true"><svg viewBox="0 0 920 220" focusable="false">
+<circle class="sv-ink" cx="820" cy="48" r="20" opacity=".9"/><circle class="sv-bg" cx="830" cy="42" r="18"/>
+<circle class="sv-ink" cx="700" cy="56" r="2" opacity=".6"/><circle class="sv-ink" cx="750" cy="96" r="2" opacity=".6"/><circle class="sv-ink" cx="70" cy="40" r="2" opacity=".6"/><circle class="sv-ink" cx="250" cy="34" r="2" opacity=".6"/><circle class="sv-ink" cx="880" cy="110" r="2" opacity=".6"/>
+<rect class="sv-sf" x="0" y="200" width="920" height="20"/><path class="sv-ln" d="M0 200H920"/>
+<rect class="sv-sf sv-st" x="40" y="100" width="150" height="100"/>
+<rect class="sv-a" x="70" y="78" width="90" height="22" rx="4"/><text class="sv-t" x="115" y="93" text-anchor="middle">CAFE</text>
+<path class="sv-w" d="M34 112h162l-12 22H46z"/><path class="sv-bg" opacity=".35" d="M62 112h18l-3 22H65zM108 112h18l-1 22h-14zM154 112h18l3 22h-16z"/>
+<rect class="sv-bg" x="62" y="150" width="34" height="50" rx="2"/><rect class="sv-a" x="118" y="146" width="56" height="36" rx="2" opacity=".55"/>
+<rect class="sv-l" x="242" y="170" width="6" height="30"/><circle class="sv-g" cx="245" cy="158" r="22"/><circle class="sv-g" cx="232" cy="169" r="14" opacity=".85"/>
+<path class="sv-col" d="M312 92V200M384 92V200M456 92V200M312 92V66"/><path class="sv-w" d="M312 66l16 6-16 6z"/>
+<rect class="sv-sf" x="314" y="150" width="68" height="42"/><rect class="sv-sf" x="386" y="100" width="68" height="42"/>
+<rect class="sv-i" x="300" y="192" width="168" height="8"/><rect class="sv-i" x="300" y="142" width="168" height="8"/><rect class="sv-i" x="300" y="92" width="168" height="8"/>
+<path class="sv-w" d="M486 200l8-22 8 22z"/>
+<path class="sv-cr" d="M520 200V22M452 26H650"/><rect class="sv-w" x="504" y="192" width="32" height="8"/><rect class="sv-l" x="452" y="26" width="16" height="14"/><rect class="sv-a" x="512" y="30" width="16" height="14"/>
+<path class="sv-cb" d="M610 26V76"/><rect class="sv-a" x="598" y="76" width="24" height="14"/>
+<rect class="sv-i" x="660" y="184" width="120" height="16" rx="8"/><rect class="sv-w" x="676" y="160" width="70" height="26" rx="5"/><rect class="sv-w" x="716" y="132" width="40" height="30" rx="5"/><rect class="sv-a" x="724" y="139" width="22" height="16" rx="2" opacity=".6"/><rect class="sv-i" x="744" y="160" width="26" height="22" rx="4"/>
+<path class="sv-boom" d="M682 168L636 122L604 158"/><path class="sv-w" d="M590 156h26l-6 26h-22z"/>
+<path class="sv-l" d="M792 200Q830 168 880 200z"/><rect class="sv-l" x="897" y="176" width="6" height="24"/><circle class="sv-g" cx="900" cy="166" r="18"/>
+</svg></div>
+<h2>Proyek</h2>
+<p class="homehint">Pilih proyek untuk melihat progres dan mencatat pengeluaran. Batang = biaya terpakai, garis biru = progres pekerjaan.</p>
+<div class="plist" id="tabs-list"></div>
+<details style="margin-top:18px"><summary>Tambah proyek baru</summary>
+<label for="pn">Nama proyek</label><input type="text" id="pn" placeholder="Contoh: Toko Sepatu Dago">
+<label for="pa">Anggaran (Rp)</label><input type="number" id="pa" min="1" inputmode="numeric" placeholder="250000000">
+<button class="btn ghost" type="button" id="addp" style="max-width:240px">Tambah proyek</button></details>
+</div>
+
+<button class="back dv" id="back" type="button" hidden>&larr; Semua proyek</button>
+<section id="sum" class="dv" hidden></section>
+
+<div class="cols dv" hidden>
+<div>
+<form class="panel" id="form" autocomplete="off">
+<h2>Catat pengeluaran</h2>
+<div class="seg" id="seg" role="group" aria-label="Jenis pengeluaran"></div>
+<div class="chips" id="chips"></div>
+<label for="nama">Nama item</label>
+<input type="text" id="nama" placeholder="Contoh: Semen 10 sak" required>
+<label for="jumlah">Biaya (Rp)</label>
+<input type="number" id="jumlah" inputmode="numeric" min="1" step="1" placeholder="850000" required>
+<div class="hint" id="hint"></div>
+<label for="tgl">Tanggal</label>
+<input type="date" id="tgl">
+<label for="ket">Catatan (toko, nota, pembeli)</label>
+<input type="text" id="ket" placeholder="Opsional">
+<button class="btn" type="submit">Catat pengeluaran</button>
+</form>
+<div class="panel" style="margin-top:16px">
+<div class="prow"><h2 style="margin:0">Progres pekerjaan</h2><b id="pv"></b></div>
+<label for="prog" style="margin-top:6px">Geser sesuai progres lapangan, lalu bandingkan dengan biaya</label>
+<input type="range" id="prog" min="0" max="100" step="1">
+
+</div>
+</div>
+
+<div class="panel">
+<h2>Riwayat pengeluaran</h2>
+<div class="filters" id="filters" role="group" aria-label="Filter jenis"></div>
+<div class="scroll"><table><thead><tr><th>Tanggal</th><th>Item</th><th>Jenis</th><th class="n">Biaya</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="store" id="store">
+<b>Penyimpanan</b>
+<div id="storeinfo"></div>
+<div class="row"><button class="btn ghost" id="csv" hidden>Unduh CSV</button><button class="btn ghost" id="reset">Kembalikan data contoh</button></div>
+</div>
+</div>
+</div>
+</div>
+<div id="toasts" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
